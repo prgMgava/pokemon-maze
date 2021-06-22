@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="assets/image/favicon/favicon.ico" type="image/x-icon">
+    <title>Pokemon Labirinty</title>
+</head>
+<body>
+    <audio src="assets/mid/opening.mp3" autoplay id="openingHTML"></audio>
+    <div id="loading" class="loading">
+        <img src="assets/image/pokemon-logo.png" class="logo" />
+        <h1 id="initialButton">LOADING...</h1>
+    </div>
+    <div class="transition_modal" id="transitionModal">
+    </div>
+    <div class="background" id="modalBackground"></div>
+    <main id="main" class="main hidden">
+            <div class="container_pokedex">
+                <div class="container_pokedex_menu hidden" id="pokedexMenu">
+                    <div class="pokedex_menu">
+                        <span class="bar_tl"></span>
+                        <span class="bar_tm"></span>
+                        <span class="bar_tr"></span>
+                        <div class="menu_controls">
+                            <h5>Controls:</h5>
+                            <p>Move with Keyboard Arrows</p>
+                            <p>Press X to return</p>
+                            <p>Press Space to select</p>
+                        </div>
+                        <div class="divisor"></div>
+                        <div class="menu_social">
+                            <div><img src="assets/image/rock-insigne.png"></div>
+                            <div>
+                
+                            <a href="https://www.linkedin.com/in/mgavadev/" target="blank"><img src="assets/image/linkedin.png" alt="Linkedin" class="social_links" id="linkedinLink"></img></a>
+                            </div>
+                            <div><img src="assets/image/sun-insigne.png"></div>
+                            <div><img src="assets/image/bug-insigne.png"></div>
+                            <div>
+                
+                                <a href="https://github.com/prgMgava" target="_blank"><img src="assets/image/github.png" alt="GitHub" class="social_links" id="githubLink"></img></a>
+                            </div>
+                            <div><img src="assets/image/water-insigne.png" alt=""></div>
+                        </div>
+                        <div class="divisor"></div>
+                        <div class="menu_items">
+                            <div class="menu_items_bag" id="bag" title="Bag">
+                            </div>
+                            <div class="menu_items_pokeball" title="?"></div>
+                        </div>
+                        <div class="divisor"></div>
+                        <div class="settings">
+                            <div class="settings_info" id="infoSetting" title="settings"></div>
+                            <div class="about" id="about" title="About"></div>
+                        </div>
+                        <div class="divisor"></div>
+                    </div>
+                </div>
+                <div class="container_pokedex_front" id="pokedexFront">
+                    <div class="pokedex_front page_front">
+                        <span class="block_tr"></span>
+                        <span class="border_t"></span>
+                        <span class="border_tl"></span>
+                        <span class="border_mr"></span>
+                        <div class="pokedex_head">
+                            <div class="pokedex_left_head">
+                                <div class="pokedex_big_light">
+                                    <div class="cross_vertical"></div>
+                                    <div class="cross_horizontal"></div>
+                                </div>
+                            </div>
+                            <div class="pokedex_right_head">
+                                <span class="border_head_b"></span>
+                                <span class="blocks_l"></span>
+                                <div class="red_light"></div>
+                                <div class="yellow_light"></div>
+                                <div class="green_light"></div>
+                            </div>
+                        </div>
+                        <div class="pokedex_body">
+                            <span class="border_body_lb"></span>
+                            <div class="triangle" id="pokedexOpen"></div>
+                        </div>
+                        <div class="pokedex_footer">
+                            <div class="rows_footer"></div>
+                        </div>
+                        <span class="block_br"></span>
+                        <span class="block_brb"></span>
+                    </div>
+                </div>
+                <div class="container_pokedex_display hidden" id="pokedexDisplay">
+                    <div class="pokedex_front">
+                        <span class="block_tr"></span>
+                        <span class="border_t"></span>
+                        <span class="border_tl border_tl_display"></span>
+                        <span class="border_mr"></span>
+                        <div class="pokedex_head">
+                            <span class="border_head_tlr">
+                                <span class="block_tl"></span>
+                            </span>
+                            <div class="pokedex_left_head">
+                                <div class="pokedex_big_light">
+                                    <div class="cross_vertical"></div>
+                                    <div class="cross_horizontal"></div>
+                                </div>
+                            </div>
+                            <div class="pokedex_right_head">
+                                <div class="red_light"></div>
+                                <div class="yellow_light"></div>
+                                <div class="green_light"></div>
+                            </div>
+                        </div>
+                        <div class="pokedex_body">
+                            <span class="border_body_lb border_body_lb_display"></span>
+                            <div class="pokedex_screen" id="pokedexScreen">
+                                <span class="border_display_tl"></span>
+                                <div class="box_arrows">
+                                    <div class="box_arrows_lr" id="arrowsLR">
+                                        <div class="screen_arrow_left">
+                                            <img src="assets/image/arrow.png" id="arrowLeftImg">
+                                        </div>
+                                        <div class="screen_arrow_right">
+                                            <img src="assets/image/arrow.png" id="arrowRightImg">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="display_bag hidden" id="displayBag">
+                                    <p>INVENTORY</p>
+                                    <div class="display_item" id="item"></div>
+                                </div>
+                                <div class="display_settings hidden" id="displaySettings">
+                                    <h5>SETTINGS</h5>
+                                    <p>Sound:</p>
+                                    <ul>
+                                        <li class="setting_selected" id="soundOn">On</li>
+                                        <li id="soundOff">Off</li>
+                                    </ul>
+                                    <p class="gap_theme">Themes:</p>
+                                    <ul>
+                                        <li class="setting_selected" id="classicTheme">Classic</li>
+                                        <li id="ghostTheme">Ghost</li>
+                                        <li id="fairyTheme">Fairy</li>
+                                    </ul>
+                                </div>
+                                <span class="block_display_br"></span>
+                                <span class="block_bl"></span>
+                            </div>
+                            <div class="pokedex_controls" >
+                                <div class="select_controls" id="toBack" title="Back"></div>
+                                <div class="play_controls" id="buttonPlay" title="Play"></div>
+                                <div class="arrows_controls">
+                                    <div>
+                                        <div class="cross_arrow_horizontal">
+                                            <div class="button_cross" id="crossLeft" title="Left"></div>
+                                            <div class="button_cross" id="crossRight" title="Right"></div>
+                                        </div>
+                                        <div class="cross_arrow_vertical">
+                                            <div class="button_cross" id="corssUp" title="Up"></div>
+                                            <div class="button_cross" id="crossDown" title="Down"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <span class="block_br"></span>
+                        <span class="block_brb"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="maze_display">
+                <canvas class="maze hidden" id="maze" width="540" height="375"></canvas>  
+                <div class="canvas_score hidden" id="canvasScore">
+                    <div class="box_points">
+                        <div class="points">
+                            <p id="itemScore">Items x/x</p>
+                            <p id="itemsPoints">0000</p>
+                        </div>
+                        <div class="points">
+                            <p id="timerScore">Time Bonus</p>
+                            <p id="timerPoints">0000</p>
+                        </div>
+                        <div class="points">
+                            <p id="totalScore">Total</p>
+                            <p id="totalPoints">0000</p>
+                        </div>
+                    </div>
+                    <button id="next" class="button_next">Press Here</button>
+                </div>  
+                <div class="canvas_question hidden" id="canvasQuestion">
+                    <div>
+                        <div class="ballon_text">
+                            <p>BOOH... do you wanna die mortal? If you go through this door your only certainty is death...</p>
+                            <div class="buttons_question">
+                                <button class="button_question" id="buttonYes">YES</button>
+                                <button class="button_question" id="buttonNo">NO</button>
+                            </div>
+                        </div>
+                        <img src="assets/image/ballon-talk.png" class="ballon_talk"></div>
+                    <div>
+                        <div><img src="assets/image/gastly.webp" class="image_gastly">
+                    </div>
+                    </div>
+                </div>
+                <div class="cavas_locked hidden" id="canvasLocked">
+                    <div class="box_msg">
+                        <div>
+                            <img src="assets/image/box-fill.png">
+                            <h5>LOCKED</h5>
+                            <button class="still_locked" id="buttonExit">Exit</button>
+                        </div>
+                      
+                    </div>
+                </div>
+                <div class="info_bar hidden" id="infoBar">
+                    <div>
+                        <div class="info_score" id="infoScore">Score 0000</div>
+                    </div>
+                    <div class="info_flex">
+                        <div class="info_clock">
+                            <img src="assets/image/timer.png" alt="">
+                            <p id="currentTimer">0:00</p>
+                        </div>
+                        <div class="info_sound" id="infoSound">
+                        </div>
+                    </div>
+                </div>
+                <div class="history hidden" id="history">
+                    <div id="containerHistory">
+                        <h1>POKEMON MAZE</h1>
+                        <p>The Legend goes that The old walls of this labyrinth hold many mysteries and that everyone who entered never came out alive or dead.</br> Since then ghosts haunt the place and Prisoners cannot get out because the walls have been bewitched.</br> But now many years later the spell is fading and they eagerly yearn to be free. If you go in, you may never leave there.</p>
+                        <p class="hidden">reza a lenda que As velhas paredes deste labirinto guardam muitos misterios e que todos que entraram jamais sairam vivos ou mortos. Desde entao fantasmas assombram o local e Presos, nao conseguem sair porque as paredes foram enfeiticadas . Mas agora muitos anos depois o  feitico esta se enraquecendo e eles anseiam ansiosamentes para se libertar. Se voce entrar talvez nunca mmais saia dali</p>
+                        <h5>How to play:</h5>
+                        <p>Use the keyboard keys to find the exit from the maze, and collect the items you find along the way.Good Look!</p>
+                         <button class="exit_history" id="exitHistory">Exit</button>
+                    </div>
+                    <div class="arrows_scroll">
+                        <div class="scroll_up">
+                            <img src="assets/image/arrow.png" id="canvasScrollUp" class="hidden">
+                        </div>
+                        <div class="scroll_down">
+                            <img src="assets/image/arrow.png" id="canvasScrollDown">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="hidden_bag hidden" id="showBag" style="left: 0;">
+                <span class="tab_bag">
+                    <label id="bagTab">
+                        <span>B</span>
+                        <span>A</span>
+                        <span>G</span>
+                    </label>
+                </span>
+                <aside class="aside_bag">
+                    <h1>INVENTORY</h1>
+                    <div>
+                        <div class="inventory">
+                            <div class="every_item" id="everyItem"></div>
+                        </div>
+                        <div class="item_especs" id="itemEspec">
+                            <h5 id="nameItemEspec">BAG EMPTY</h5>
+                            <p id="descriptionItemEspec"></p>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+
+    </main>
+    <footer id="footer" class="footer"></footer>
+</body>
+<script src="script.js"></script>
+</html>
