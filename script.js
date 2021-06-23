@@ -1294,10 +1294,10 @@ function collisionLogical(player,obj,item,exit,chst){
     
     // FOR WALLS 
 
-    let axisXWalls = (player.x + player.width/2) - (obj.x + obj.width/2)
+    let axisXWalls = (player.x + player.width) - (obj.x + obj.width)
     let axisYWalls = (player.y + player.height/2) - (obj.y + obj.height/2)
-    let sumWidthWalls = (player.width + obj.width)/2
-    let sumHeightWalls = (player.height + obj.height)/2
+    let sumWidthWalls = (player.width + obj.width)/3
+    let sumHeightWalls = (player.height + obj.height)/2.5
 
     if(Math.abs(axisXWalls) < sumWidthWalls && Math.abs(axisYWalls) < sumHeightWalls){
         let overLapX = sumWidthWalls - Math.abs(axisXWalls)
