@@ -24,31 +24,32 @@ const openBagSound = new Audio("./assets/mid/bag-open.mp3")
 const exitSound = new Audio("./assets/mid/exit.mp3")
 const openAboutSound = new Audio("./assets/mid/about-open.mp3")
 const settingSelectSound = new Audio("./assets/mid/setting-select.mp3")
-// const openingSound = new Audio("./assets/mid/opening.mp3")
+const openingSound = new Audio("./assets/mid/opening.mp3")
 const gameSound = new Audio("./assets/mid/lavender-town.mp3")
 const itemSound = new Audio("./assets/mid/colect-item.mp3")
 const keySound = new Audio("./assets/mid/colect-key.mp3")
 const scoreSound = new Audio("./assets/mid/score.mp3")
 const questionSound = new Audio("./assets/mid/question.mp3")
-const openingSound = document.getElementById('openingHTML')
 
 
 // MODAL LOADING
-setTimeout(() => {
-    openingSound.play()
-}, 200);
+
 const initialButton = document.getElementById("initialButton")
-openingSound.dataset.loop = true
-const loading = setInterval(function () {
-    clearInterval(loading);
-    initialButton.innerHTML = "PLAY"
-    initialButton.addEventListener("click",showPokedex)
-    initialButton.style.cursor = "pointer"
-}, 000);
+initialButton.innerHTML = "PLAY"
+initialButton.style.cursor = "pointer"
+initialButton.addEventListener("click",showPokedex)
+
 
 function showPokedex () {
-    document.getElementById("loading").style.display = "none";
-    main.classList.remove("hidden")
+    openingSound.play()
+    openingSound.loop = true
+    initialButton.innerHTML = "LOADING"
+    initialButton.style.cursor = "none"
+    const loading = setInterval(function () {
+        clearInterval(loading);
+        document.getElementById("loading").style.display = "none";
+        main.classList.remove("hidden")
+    }, 8000);
 }
 
 // POKEMON CHARACTER CONSTRUCTOR
@@ -60,24 +61,25 @@ imageVoltorb.src = "./assets/image/voltorb-character.png"
 imageTogepi.src = "./assets/image/togepi-character.png"
 
 class Character{
-    constructor(name,url,visibility){
+    constructor(name,url,visibility,animation){
         this.character = name;
         this.image = url.src;
         this.width = 100
         this.height = 100
         this.visible = visibility
         this.isPlay = false
+        this.animation = animation
     }
 }
 
 // POKEMON CHARACTER
-const haunter = new Character("#093 Haunter",imageHaunter,true)
-const voltorb = new Character("#100 Voltorb",imageVoltorb,true)
-const togepi = new Character("#175 Togepi",imageTogepi,false)
+const haunter = new Character("#093 Haunter",imageHaunter,true,'haunter_animation')
+const voltorb = new Character("#100 Voltorb",imageVoltorb,true,'voltorb_animation')
+const togepi = new Character("#175 Togepi",imageTogepi,true,'togepi_animation')
 const characters = createDiv("screen_characters", "displayCharacters")
 const player = document.createElement("img")
 const nameCharacter = document.createElement("p")
-const setOptions = [haunter,voltorb]
+const setOptions = [haunter,voltorb,togepi]
 let currentOption = 0
 
 // BAG AND ITEMS
@@ -194,7 +196,11 @@ function setCharacters(option,direction){
         if (option[2]) {
             option[2].isPlay = false
         }
-        player.classList.add("character")   
+        player.classList.add("character") 
+        player.classList.remove("togepi_animation")
+        player.classList.remove("haunter_animation")
+        player.classList.remove("voltorb_animation") 
+        player.classList.add(`${option[0].animation}`)
         nameCharacter.classList.add("character_name")
         nameCharacter.innerText = option[0].character
         characters.appendChild(player)
@@ -226,6 +232,10 @@ function setCharacters(option,direction){
                 option[2].isPlay = true
             }
             player.classList.add("character")
+            player.classList.remove("togepi_animation")
+            player.classList.remove("haunter_animation")
+            player.classList.remove("voltorb_animation") 
+            player.classList.add(`${option[currentOption + 1].animation}`)  
             nameCharacter.classList.add("character_name")
             nameCharacter.innerText = option[currentOption + 1].character
             characters.appendChild(player)
@@ -234,6 +244,10 @@ function setCharacters(option,direction){
             currentOption++
         } else {
             player.src = option[0].image
+            player.classList.remove("togepi_animation")
+            player.classList.remove("haunter_animation")
+            player.classList.remove("voltorb_animation") 
+            player.classList.add(`${option[0].animation}`) 
             option[0].isPlay = true
             option[1].isPlay = false
             if (option[2]) {
@@ -272,6 +286,10 @@ function setCharacters(option,direction){
                 option[2].isPlay = true
             }
             player.classList.add("character")
+            player.classList.remove("togepi_animation")
+            player.classList.remove("haunter_animation")
+            player.classList.remove("voltorb_animation") 
+            player.classList.add(`${option[currentOption - 1].animation}`)
             nameCharacter.classList.add("character_name")
             nameCharacter.innerText = option[currentOption - 1].character
             characters.appendChild(player)
@@ -294,6 +312,10 @@ function setCharacters(option,direction){
                 option[2].isPlay = true
             }
             player.classList.add("character")
+            player.classList.remove("togepi_animation")
+            player.classList.remove("haunter_animation")
+            player.classList.remove("voltorb_animation") 
+            player.classList.add(`${option[option.length - 1].animation}`)
             nameCharacter.classList.add("character_name")
             nameCharacter.innerText = option[option.length - 1].character
             characters.appendChild(player)
@@ -302,30 +324,11 @@ function setCharacters(option,direction){
             currentOption = option.length - 1
         }
     }
-    createAnimation(option)
 }
 
 // ANIMATIONS SCREEN
 const arrowRightImg = document.getElementById("arrowRightImg")
 const arrowLeftImg = document.getElementById("arrowLeftImg")
-
-function createAnimation(pokemon){
-    if(pokemon.character == "#075 Haunter"){
-        player.classList.add("haunter_animation")
-        player.classList.remove("voltorb_animation")
-        player.classList.remove("togepi_animation")
-    } else if (pokemon.character == "#100 Voltorb"){
-        player.classList.add("togepi_animation")
-        player.classList.remove("haunter_animation")
-        player.classList.remove("voltorb_animation")
-
-    } else {
-        player.classList.add("voltorb_animation")
-        player.classList.remove("haunter_animation")
-        player.classList.remove("togepi_animation")
-    }
-
-}
 
 function arrowAnimation (direction) {
     if (direction === "Right") {
@@ -372,12 +375,14 @@ openPokedex.addEventListener("click", () => {
     isDisplayOpen = true
     isPokedexOpen = false
     openPokedexSound.play()
+    openingSound.volume = .4
 })
 
 play.addEventListener("click", playGame)
 
 function playGame () {
-    // startTransition()
+    isDisplayOpen = false
+    startTransition()
     setTimeout(() => {
         modalScore.classList.add("hidden")
         currentPlayer.src = player.src
@@ -385,7 +390,6 @@ function playGame () {
         displayPokedex.classList.add("hidden")
         infoBar.classList.remove("hidden")
         hiddenBag.classList.remove("hidden")
-        isDisplayOpen = false
         isBagOpen = false
         isPause = true
         isPlayerMove = true
@@ -423,7 +427,7 @@ function playGame () {
                 pokeballGs.visible = true
             }
            
-    },000); 
+    },8000); 
     return currentPlayer
 }
 function isPokeballGsVisible (bag) {
@@ -556,7 +560,11 @@ function updateModalEndGame(){
     itemScore.innerText = `Items ${totalItemsGotcha}/9`;
     timerPoints.innerText = ("0000" + sumTimerPoints).slice(-4);
     let currenteTotalPoints = sumTimerPoints + points
-    totalPoints.innerText = ("0000" + currenteTotalPoints).slice(-4);
+    if (currenteTotalPoints > 9999) {
+        totalPoints.innerText = currenteTotalPoints
+    } else {
+        totalPoints.innerText = ("0000" + currenteTotalPoints).slice(-4);
+    }
 }
 
 
@@ -884,30 +892,31 @@ document.addEventListener('keydown', (event) => {
             toBackSound.play()
         }
     }
-    if(keyName === "x"){
-        canvasHistory.classList.add("hidden")
-        showBag.classList.add("hidden")
-        characters.classList.remove("hidden")
-        displaySettings.classList.add("hidden")
-        arrowsLR.classList.remove("hidden")
-        textHistory.style.transform = `translateY(0px)`
-        if(!isPokedexOpen) {
-            toBackSound.play()
-            toBackSound.currentTime = 0
-        } 
-        if (isHistoryOpen){
-            mazeCanvas.classList.add("hidden")
-            menuPokedex.classList.remove("hidden")
-            displayPokedex.classList.remove("hidden")
+    if (isDisplayOpen) {
+        if(keyName === "x"){
+            canvasHistory.classList.add("hidden")
+            showBag.classList.add("hidden")
+            characters.classList.remove("hidden")
+            displaySettings.classList.add("hidden")
+            arrowsLR.classList.remove("hidden")
+            textHistory.style.transform = `translateY(0px)`
+            if(!isPokedexOpen) {
+                toBackSound.play()
+                toBackSound.currentTime = 0
+            } 
+            if (isHistoryOpen){
+                mazeCanvas.classList.add("hidden")
+                menuPokedex.classList.remove("hidden")
+                displayPokedex.classList.remove("hidden")
+            }
+            if (isPlayerMove) {   
+            }
+            isDisplayOpen = true
+            isHistoryOpen = false
+            translateHistory = 0
         }
-        if (isPlayerMove) {   
-        }
-        isDisplayOpen = true
-        isHistoryOpen = false
-        translateHistory = 0
-      
-
     }
+   
 })
 
 // SCORE MODAL UPDATE
@@ -932,16 +941,15 @@ function startTransition () {
     const modalTransition = document.getElementById("transitionModal")
     modalTransition.classList.remove("hidden")
     let count = 0
-    const widthSquare = 34
+    let widthSquare = Math.floor(34)
     const thisWidth = innerWidth
     const thisHeight = innerHeight
     const columnSquares = Math.floor(thisWidth/widthSquare)
 const rowSquares = Math.ceil(thisHeight/widthSquare)
-    const rest = thisWidth%widthSquare
+    const rest = Math.floor(thisWidth%widthSquare) + .01
     const totalSquare = columnSquares * rowSquares
-    for (let i = 0; i <= totalSquare; i++){
+    for (let i = 0; i <= totalSquare + 50; i++){
         if (i%columnSquares === 0 ) {
-            console.log("oi")
             const div = document.createElement("div")
             div.style.width = `${widthSquare + rest}px`
             div.style.animationDelay = getTimer()
@@ -949,15 +957,17 @@ const rowSquares = Math.ceil(thisHeight/widthSquare)
             div.style.background = getColor()
             div.classList.add("square") 
             modalTransition.appendChild(div)
-            setTimeout(function(){div.classList.add("hidden")},9000)
+            setTimeout(function(){div.classList.add("hidden")},9550)
         } else {
+          
             const div = document.createElement("div")
+            div.style.width = `${Math.ceil(widthSquare)}px`
             div.style.animationDelay = getTimer()
             div.style.animationDuration = "0.1s"
             div.style.background = getColor()
             div.classList.add("square") 
             modalTransition.appendChild(div)
-            setTimeout(function(){div.classList.add("hidden")},9000)
+            setTimeout(function(){div.classList.add("hidden")},9550)
 
         }
     }
@@ -1038,7 +1048,7 @@ function isSound (isOn) {
         exitSound.volume = 1
         openAboutSound.volume = 1
         settingSelectSound.volume = 1
-        openingSound.volume = .5
+        openingSound.volume = .4
         gameSound.volume = .5
         itemSound.volume = 1
         keySound.volume = 1
@@ -1069,10 +1079,10 @@ function changeBackground (theme) {
         modalBackground.style.backgroundImage = "url(./assets/image/classic-background.jpg)"
     }
     if (theme === "ghost") {
-        modalBackground.style.backgroundImage = "url(./assets/image/ghost-background.png)"
+        modalBackground.style.backgroundImage = "url(https://i.pinimg.com/564x/1d/88/39/1d8839ae5de483b4fafa5226b4ccea4c.jpg)"
     }
     if (theme === "fairy") {
-        modalBackground.style.backgroundImage = "url(./assets/image/fairy-background.png)"
+        modalBackground.style.backgroundImage = "url(https://i.pinimg.com/originals/5b/4d/83/5b4d8396a23986bac605d6c526992ba7.png)"
     }
 }
 // ---------------------------------------------------------------------------------------------------

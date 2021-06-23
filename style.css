@@ -13,6 +13,7 @@
     --POKEDEX-DARK-RED:#831e13;
     --POKEDEX-BLUE:#44a9ed;
     --POKEDEX-DARK-BLUE:#3d9edf;
+    --POKEDEX-LIGHT-BLUE:#90cff8 ;
     --POKEDEX-YELLOW:#fcc425;
     --POKEDEX-DARK: #232323;
     --POKEDEX-DISPLAY-DARK:#373737;
@@ -45,8 +46,8 @@ body{
 main{
     display: flex;
     justify-content: center;
-    align-items: flex-start ;
-
+    align-items: center;
+    margin-top: -5%;
 }
 .container_pokedex{
     display: flex;
@@ -59,7 +60,7 @@ main{
     width: 100vw;
     height: 100vh;
     background-image: url(assets/image/classic-background.jpg);
-    filter: grayscale(80%);
+    filter: grayscale(40%);
 }
 .container_pokedex_menu{
     /* transition: ease all .5s; */
@@ -119,6 +120,45 @@ main{
     right: 10px;
     width: 60px;
     height: 60px;
+    width: 60px;
+    height: 60px;
+    background: var(--POKEDEX-BLUE);
+    /* position: relative; */
+    animation: light backwards .7s infinite;
+}
+.pokedex_big_light::before{
+    content: "";
+    background: transparent;
+    box-shadow: rgb(222, 246, 255) 0px 0px 70px 50px;
+    position: absolute;
+    z-index: 2;
+    border-radius: 50%;
+    bottom: 50%;
+    right: 50%;
+    transform: translate(50%,50%);
+    animation: fade linear .7s infinite;
+}
+.edge{
+    width: 15px;
+    height: 15px;
+    background: var(--POKEDEX-FRONT-COLOR);
+    position: absolute;
+}
+.tl{
+    top: 0;
+    left: 0;
+}
+.tr{
+    top: 0;
+    right: 0%;
+}
+.br{
+    bottom: 0;
+    right: 0;
+}
+.bl{
+    bottom: 0;
+    left: 0;
 }
 .red_light{
     background:var(--POKEDEX-DARK-RED) ;
@@ -424,8 +464,8 @@ main{
     bottom: 10px;
 }
 .maze{
-    width: 540px;
-    height: 375px;
+    width: 539px;
+    height: 384px;
     border: solid 75px var(--POKEDEX-DISPLAY-DARK);
     box-shadow: -25px 25px 5px 0px #d2d2d29d;
 }
@@ -476,7 +516,7 @@ main{
 .canvas_score{
     position: absolute;
     width: 79%;
-    height: 71%;
+    height: 72%;
     top: 75px;
     left: 75px;
     background:var(--POKEDEX-DISPLAY-DARK); 
@@ -543,7 +583,7 @@ main{
     top: 75px;
     left: 75px;
     width: 78.3%;
-    height: 71%;
+    height: 72%;
     background: var(--POKEDEX-DISPLAY-DARK);
     background-image:linear-gradient(45deg, var(--POKEDEX-DARK) 25%, transparent 25%,transparent 75%, var(--POKEDEX-DARK) 75%, var(--POKEDEX-DARK) 100%),
     linear-gradient(45deg, var(--POKEDEX-DARK) 25%, transparent 25%,transparent 75%, var(--POKEDEX-DARK) 75%, var(--POKEDEX-DARK) 100%);
@@ -695,7 +735,7 @@ main{
     left: 75px;
     color: var(--POKEDEX-WHITE);
     background: var(--POKEDEX-DARK);
-    height: 71%;
+    height: 72%;
     width: 79%;
     padding: 40px;
     overflow: hidden;
@@ -862,7 +902,7 @@ span.block_tl {
     padding: 0;
     box-sizing: border-box;
    height: 100%;
-   width: 100%;
+   width: 106%;
     overflow: hidden;
     overflow-y: hidden;
     background: transparent;
@@ -979,5 +1019,21 @@ img.logo {
 @keyframes fadin {
     from{opacity: 1;}
     to{opacity: 0}
-  
+}
+
+@keyframes light {
+    0%{background: var(--POKEDEX-BLUE);}
+    50%{background-color: var(--POKEDEX-LIGHT-BLUE);
+        background-image:
+          radial-gradient(
+            circle closest-side,
+            #a1d4f7,
+            var(--POKEDEX-BLUE)
+          );;}
+    100%{background: var(--POKEDEX-BLUE);}
+}
+@keyframes fade {
+    0%{opacity: 0;}
+    50%{opacity: .5;}
+    100%{opacity: 0;}
 }
