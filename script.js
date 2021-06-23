@@ -15,25 +15,28 @@ let startWatch
 
 // AUDIOS
 
-const arrowsSound = new Audio("./assets/mid/arrow-select.wav")
-const openPokedexSound = new Audio("./assets/mid/pokedex.wav")
-const toBackSound = new Audio("./assets/mid/back.wav")
-const playSound = new Audio("./assets/mid/play-game.wav")
-const openSettingSound = new Audio("./assets/mid/setting-open.wav")
-const openBagSound = new Audio("./assets/mid/bag-open.wav")
-const exitSound = new Audio("./assets/mid/exit.wav")
-const openAboutSound = new Audio("./assets/mid/about-open.wav")
-const settingSelectSound = new Audio("./assets/mid/setting-select.wav")
+const arrowsSound = new Audio("./assets/mid/arrow-select.mp3")
+const openPokedexSound = new Audio("./assets/mid/pokedex.mp3")
+const toBackSound = new Audio("./assets/mid/back.mp3")
+const playSound = new Audio("./assets/mid/play-game.mp3")
+const openSettingSound = new Audio("./assets/mid/setting-open.mp3")
+const openBagSound = new Audio("./assets/mid/bag-open.mp3")
+const exitSound = new Audio("./assets/mid/exit.mp3")
+const openAboutSound = new Audio("./assets/mid/about-open.mp3")
+const settingSelectSound = new Audio("./assets/mid/setting-select.mp3")
 // const openingSound = new Audio("./assets/mid/opening.mp3")
 const gameSound = new Audio("./assets/mid/lavender-town.mp3")
-const itemSound = new Audio("./assets/mid/colect-item.wav")
-const keySound = new Audio("./assets/mid/colect-key.wav")
-const scoreSound = new Audio("./assets/mid/score.wav")
-const questionSound = new Audio("./assets/mid/question.wav")
+const itemSound = new Audio("./assets/mid/colect-item.mp3")
+const keySound = new Audio("./assets/mid/colect-key.mp3")
+const scoreSound = new Audio("./assets/mid/score.mp3")
+const questionSound = new Audio("./assets/mid/question.mp3")
 const openingSound = document.getElementById('openingHTML')
 
 
 // MODAL LOADING
+setTimeout(() => {
+    openingSound.play()
+}, 200);
 const initialButton = document.getElementById("initialButton")
 openingSound.dataset.loop = true
 const loading = setInterval(function () {
