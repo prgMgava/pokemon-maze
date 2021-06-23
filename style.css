@@ -700,7 +700,7 @@ main{
     top: 75px;
     left: 75px;
     height: 32px;
-    width: 78.4%;
+    width: 539px;
     background: #2b2b2b73;
     display: flex;
     justify-content: space-between;
@@ -735,8 +735,8 @@ main{
     left: 75px;
     color: var(--POKEDEX-WHITE);
     background: var(--POKEDEX-DARK);
-    height: 72%;
-    width: 79%;
+    height: 384px;
+    width: 539px;
     padding: 40px;
     overflow: hidden;
 }

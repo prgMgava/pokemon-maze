@@ -424,7 +424,7 @@ function playGame () {
                 pokeballGs.visible = true
             }
            
-    },8000); 
+    },10000); 
     return currentPlayer
 }
 function isPokeballGsVisible (bag) {
@@ -946,7 +946,7 @@ function startTransition () {
 const rowSquares = Math.ceil(thisHeight/widthSquare)
     const rest = Math.floor(thisWidth%widthSquare) + .01
     const totalSquare = columnSquares * rowSquares
-    for (let i = 0; i <= totalSquare + 50; i++){
+    for (let i = 0; i <= totalSquare + 500; i++){
         if (i%columnSquares === 0 ) {
             const div = document.createElement("div")
             div.style.width = `${widthSquare + rest}px`
@@ -955,7 +955,7 @@ const rowSquares = Math.ceil(thisHeight/widthSquare)
             div.style.background = getColor()
             div.classList.add("square") 
             modalTransition.appendChild(div)
-            setTimeout(function(){div.classList.add("hidden")},9550)
+            setTimeout(function(){div.classList.add("hidden")},15550)
         } else {
           
             const div = document.createElement("div")
@@ -965,7 +965,7 @@ const rowSquares = Math.ceil(thisHeight/widthSquare)
             div.style.background = getColor()
             div.classList.add("square") 
             modalTransition.appendChild(div)
-            setTimeout(function(){div.classList.add("hidden")},9550)
+            setTimeout(function(){div.classList.add("hidden")},15550)
 
         }
     }
