@@ -12,6 +12,7 @@ let unlocked = false
 let isPause = false
 let cross = true
 let startWatch
+let inGame = false
 
 // AUDIOS
 
@@ -75,11 +76,11 @@ class Character{
 // POKEMON CHARACTER
 const haunter = new Character("#093 Haunter",imageHaunter,true,'haunter_animation')
 const voltorb = new Character("#100 Voltorb",imageVoltorb,true,'voltorb_animation')
-const togepi = new Character("#175 Togepi",imageTogepi,true,'togepi_animation')
+const togepi = new Character("#175 Togepi",imageTogepi,false,'togepi_animation')
 const characters = createDiv("screen_characters", "displayCharacters")
 const player = document.createElement("img")
 const nameCharacter = document.createElement("p")
-const setOptions = [haunter,voltorb,togepi]
+const setOptions = [haunter,voltorb]
 let currentOption = 0
 
 // BAG AND ITEMS
@@ -210,22 +211,20 @@ function setCharacters(option,direction){
     if(direction === "Right"){
         if(option[currentOption + 1]){
             player.src = option[currentOption + 1].image
-            if (option[currentOption + 1].character === '#093 Hunter') {
+            if (option[currentOption + 1].character === '#093 Haunter') {
                 option[0].isPlay = true
                 option[1].isPlay = false
                 if (option[2]) {
                     option[2].isPlay = false
                 }
 
-            }
-            if (option[currentOption + 1].character === "#100 Voltorb") {
+            } else if (option[currentOption + 1].character === "#100 Voltorb") {
                 option[0].isPlay = false
                 option[1].isPlay = true
                 if (option[2]) {
                     option[2].isPlay = false
                 }
-            }
-            if (option[2]) {
+            }else if (option[2]) {
                 if (option[currentOption + 1].character === '#175 Togepi')
                 option[0].isPlay = false
                 option[1].isPlay = false
@@ -265,21 +264,19 @@ function setCharacters(option,direction){
     if(direction === "Left"){
         if(option[currentOption - 1]){
             player.src = option[currentOption - 1].image
-            if (option[currentOption - 1].character === '#095 Hunter') {
+            if (option[currentOption - 1].character === '#093 Haunter') {
                 option[0].isPlay = true
                 option[1].isPlay = false
                 if (option[2]) {
                     option[2].isPlay = false
                 }
-            }
-            if (option[currentOption - 1].character === '#100 Voltorb') {
+            } else if (option[currentOption - 1].character === '#100 Voltorb') {
                 option[0].isPlay = false
                 option[1].isPlay = true
                 if (option[2]) {
                     option[2].isPlay = false
                 }
-            }
-            if (option[2]) {
+            } else if (option[2]) {
                 if (option[currentOption - 1].character === '#175 Togepi')
                 option[0].isPlay = false
                 option[1].isPlay = false
@@ -304,8 +301,7 @@ function setCharacters(option,direction){
                 if (option[2]) {
                     option[2].isPlay = false
                 }
-            }
-            if (option[2]) {
+            } else if (option[2]) {
                 if (option[option.length - 1].character === '#175 Togepi')
                 option[0].isPlay = false
                 option[1].isPlay = false
@@ -381,6 +377,7 @@ openPokedex.addEventListener("click", () => {
 play.addEventListener("click", playGame)
 
 function playGame () {
+    inGame = true
     isDisplayOpen = false
     startTransition()
     setTimeout(() => {
@@ -783,7 +780,7 @@ function restartGame(){
     hiddenBag.classList.add('hidden')
     isDisplayOpen = true
     isPlayerMove = false
-    isPause = false
+    inGame = false
     exitSound.play()
     openingSound.play()
     gameSound.pause()
@@ -794,6 +791,7 @@ function showScore(){
     modalScore.classList.remove("hidden")
     isDisplayOpen = true
     isPlayerMove = false
+    inGame = false
     calcTimerPoints(second,minute)
     updateModalEndGame()
     questionSound.pause()
@@ -892,7 +890,7 @@ document.addEventListener('keydown', (event) => {
             toBackSound.play()
         }
     }
-    if (isDisplayOpen) {
+    if (!inGame) {
         if(keyName === "x"){
             canvasHistory.classList.add("hidden")
             showBag.classList.add("hidden")
@@ -1198,13 +1196,13 @@ function changeBackground (theme) {
 
 // CONTROLS E PLAYER
     let player = {
-        // x:tileSize + 2,
-        // y:tileSize*19,
-        x: 475,
-        y: 1150, // for next tests
+        x:tileSize + 2,
+        y:tileSize*19,
+        // x: 475,
+        // y: 1150, // for next tests
         width: 30,
         height: 30,
-        speed: 10,
+        speed: 2,
         direction: true
     };
     let left = "ArrowLeft", up = "ArrowUp", right = "ArrowRight", down = "ArrowDown";
@@ -1501,21 +1499,22 @@ function collisionLogical(player,obj,item,exit,chst){
             maze[39][28] = 1
             maze[32][18] = "F"
             currentPlayerAnimated.src = "./assets/image/z-haunter-character.png"
-        }
-        if (setOptions[2]) {
+        } else if (setOptions[1].isPlay) {
+            currentPlayerAnimated.src = "./assets/image/z-voltorb-character.png"
+            maze[39][28] = "E2"
+            key.visible = false
+        } else {
+            
             if (setOptions[2].isPlay){
                 maze[39][28] = 1
                 currentPlayerAnimated.src = "./assets/image/z-togepi-character.png"
             }
-        } 
-        if (setOptions[1].isPlay) {
-            currentPlayerAnimated.src = "./assets/image/z-voltorb-character.png"
-            maze[39][28] = "E2"
-            key.visible = false
         }
         mazeContext.restore()
         if (egg.gotcha) {
-            setOptions[2] = togepi
+            if (!setOptions.includes(togepi)){
+                setOptions.push(togepi)
+            }
         }
     }
     function loopMaze(){
