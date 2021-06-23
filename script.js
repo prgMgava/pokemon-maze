@@ -50,7 +50,7 @@ function showPokedex () {
         clearInterval(loading);
         document.getElementById("loading").style.display = "none";
         main.classList.remove("hidden")
-    }, 8000);
+    }, 20000);
 }
 
 // POKEMON CHARACTER CONSTRUCTOR
