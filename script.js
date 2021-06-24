@@ -944,7 +944,7 @@ function startTransition () {
     const thisHeight = innerHeight
     const columnSquares = Math.floor(thisWidth/widthSquare)
 const rowSquares = Math.ceil(thisHeight/widthSquare)
-    const rest = Math.floor(thisWidth%widthSquare) + .01
+    const rest = Math.floor(thisWidth%widthSquare)
     const totalSquare = columnSquares * rowSquares
     for (let i = 0; i <= totalSquare + 500; i++){
         if (i%columnSquares === 0 ) {
@@ -955,7 +955,7 @@ const rowSquares = Math.ceil(thisHeight/widthSquare)
             div.style.background = getColor()
             div.classList.add("square") 
             modalTransition.appendChild(div)
-            setTimeout(function(){div.classList.add("hidden")},15550)
+            setTimeout(function(){div.classList.add("hidden")},10550)
         } else {
           
             const div = document.createElement("div")
@@ -965,7 +965,7 @@ const rowSquares = Math.ceil(thisHeight/widthSquare)
             div.style.background = getColor()
             div.classList.add("square") 
             modalTransition.appendChild(div)
-            setTimeout(function(){div.classList.add("hidden")},15550)
+            setTimeout(function(){div.classList.add("hidden")},10550)
 
         }
     }
