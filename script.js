@@ -1473,13 +1473,16 @@ function collisionLogical(player,obj,item,exit,chst){
                 }
             }
         }
-        if (player.direction) {
-            mazeContext.drawImage(currentPlayer,0,0,tileImageSize,tileImageSize,
-            player.x,player.y,player.width,player.height)   
-        } else {
-            mazeContext.drawImage(currentPlayerAnimated,225,0,tileImageSize,tileImageSize,
-            player.x,player.y,player.width,player.height)   
-        }
+        mazeContext.drawImage(currentPlayer,0,0,tileImageSize,tileImageSize,
+        player.x,player.y,player.width,player.height)   
+        
+        // if (player.direction) { ttenttar flipar img no canvas
+        //     mazeContext.drawImage(currentPlayer,0,0,tileImageSize,tileImageSize,
+        //     player.x,player.y,player.width,player.height)   
+        // } else {
+        //     mazeContext.drawImage(currentPlayerAnimated,225,0,tileImageSize,tileImageSize,
+        //     player.x,player.y,player.width,player.height)   
+        // }
               
 // PUT ITEMS IN MAZE
         const drawItems = (bag) => {
